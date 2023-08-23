@@ -1,4 +1,4 @@
-package com.maicoding.learnspringsecurity;
+package com.maicoding.learnspringsecurity.resources;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

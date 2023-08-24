@@ -20,6 +20,7 @@ public class BasicAuthSecurityConfiguration {
         http.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.csrf(AbstractHttpConfigurer::disable);
         http.httpBasic(Customizer.withDefaults());
+        http.headers().frameOptions().sameOrigin();
         return http.build();
     }
 

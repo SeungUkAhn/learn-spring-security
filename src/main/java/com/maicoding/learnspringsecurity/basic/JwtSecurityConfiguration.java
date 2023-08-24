@@ -17,8 +17,8 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
 
-//@Configuration
-public class BasicAuthSecurityConfiguration {
+@Configuration
+public class JwtSecurityConfiguration {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

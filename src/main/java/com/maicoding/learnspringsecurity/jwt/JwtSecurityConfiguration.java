@@ -36,17 +36,27 @@ import java.security.interfaces.RSAPublicKey;
 import java.util.List;
 import java.util.UUID;
 
-@Configuration
+//@Configuration
 public class JwtSecurityConfiguration {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((requests) -> requests.anyRequest().authenticated());
-        http.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        http.csrf(AbstractHttpConfigurer::disable);
-        http.httpBasic(Customizer.withDefaults());
-        http.headers().frameOptions().sameOrigin();
-        http.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
+//        http.authorizeHttpRequests((requests) -> requests.anyRequest().authenticated());
+//        http.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+//        http.csrf(AbstractHttpConfigurer::disable);
+//        http.httpBasic(Customizer.withDefaults());
+//        http.headers().frameOptions().sameOrigin();
+//        http.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
+        http.authorizeHttpRequests(auth -> auth.anyRequest()
+            .authenticated())
+            .csrf(AbstractHttpConfigurer::disable)
+            .sessionManagement(session -> session.
+                    sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
+            .httpBasic(
+                    Customizer.withDefaults())
+            .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()));
+
         return http.build();
     }
 
